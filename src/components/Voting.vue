@@ -16,6 +16,11 @@
 
 	export default {
 
+		created: function() {
+			//this.$store.dispatch('groups/loadByVoting', { votingId: this.votingId })
+			//this.$store.dispatch('features/loadByVoting', { votingId: this.votingId })
+		},
+
 		computed: {
 			...mapGetters('features', {
 				featureSelected: 'selected'
@@ -25,6 +30,10 @@
 		components: {
 		  CardBoard,
 		  CardInfo
-		}
+		},
+
+		props: [
+			'votingId'
+		]
 	}
 </script>

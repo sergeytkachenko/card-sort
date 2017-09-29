@@ -1,3 +1,6 @@
+import * as types from '../mutation-types'
+import Vue from 'vue'
+
 const state = {
 	all: {
 		'id1': {
@@ -16,15 +19,36 @@ const state = {
 }
 
 const getters = {
+
 	groups: state => {
 		return Object.values(state.all);
 	}
 }
 
-const actions = {}
+const actions = {
+
+	loadByVoting: function({ commit }, { votingId }) {
+		Vue.http.get(`/voting/${votingId}/interview`).then(res => {
+			const groupsData = {};
+			const data = res.body;
+			const groups = new Map(Object.values(data.groups));
+			groups.forEach(group => {
+				delete group.features;
+				groupsData[group.id] = group;
+			});
+			commit(types.SET_GROUPS, { groups: groupsData });
+		}).catch(res => {
+			console.debug(res);
+			commit(types.SET_GROUPS, { groups: {} });
+		});
+	}
+}
 
 const mutations = {
 
+	[types.SET_GROUPS] (state, { groups }) {
+		Vue.set(state, 'all', groups);
+	}
 }
 
 export default {

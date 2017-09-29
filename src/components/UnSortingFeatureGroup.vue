@@ -16,12 +16,11 @@
 			sortingData: {
 
 				get() {
-					let features = this.$store.getters['features/features'];
-					return features(this.group);
+					return this.$store.getters['features/unSortingFeatures'];
 				},
 
 				set(features) {
-					this.$store.commit(`features/${types.SET_FEATURES_FROM_ARRAY}`, { features, group: this.group });
+					this.$store.commit(`features/${types.SET_FEATURES_FROM_ARRAY}`, { features, group: undefined });
 				}
 			}
 		},
@@ -31,6 +30,6 @@
 			Feature
 		},
 
-		props: ['group', 'dropId']
+		props: ['drop-id']
 	}
 </script>
