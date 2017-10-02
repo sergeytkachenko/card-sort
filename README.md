@@ -2,6 +2,8 @@
 
 > BPM 
 
+![example](http://joxi.net/L21QJoPU6Og3z2.jpg)
+
 ## Build Setup
 
 ``` bash
